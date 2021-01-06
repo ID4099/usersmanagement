@@ -24,7 +24,7 @@ exports.verifyToken = async(req, res, next) => {
 
             const UsuarioActual = await Usuarios.findOne({
                 where: {
-                    id: decrypt.id
+                    ID: decrypt.ID
                 }
             });
 
@@ -48,17 +48,17 @@ exports.verifyAdmin = async(req, res, next) => {
     try {
         const UsuarioActual = await Usuarios.findOne({
             where: {
-                id: decrypt.id
+                ID: decrypt.ID
             }
         });
 
         const VerificarTipoUsuario = await TiposUsuarios.findOne({
             where: {
-                id: UsuarioActual.tiposusuarioId
+                ID: UsuarioActual.ID_ROL_USUARIO
             }
         });
 
-        if (VerificarTipoUsuario.tipo_usuario == 'Administrador') {
+        if (VerificarTipoUsuario.ROL_USUARIO == 'Admin') {
             next();
         } else {
             const confirmation = {
