@@ -1,0 +1,28 @@
+body {
+    overflow: hidden;
+}
+
+.link-blue {
+    background-color: #0d86e9;
+    color: #ffffff;
+    transition: text-decoration 0.8s;
+}
+
+.link-blue:hover {
+    color: #2169bd;
+    background-color: #ffffff;
+    border: #0ea9e6;
+}
+
+button.btn-orange {
+    background: rgb(250, 108, 13);
+}
+
+.btn-orange {
+    background: rgb(250, 108, 13);
+}
+
+a.link-orange {
+    background: rgb(250, 108, 13);
+    border-radius: 6px;
+}

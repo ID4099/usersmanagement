@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: db_c
+    ports: 
+      - "3306:3306"
+    networks:
+      - net
+    env_file:
+      -.env    # Ruta del archivo
+    volumes:
+      - .:/usr/src/app
+  api:
+    image: node:latest
+    container_name: app_api
+    ports:
+      - "5000:3000"
+    depends_on:
+      - db
+    networks:
+      - net
+    links:
+      - db
+    env_file:
+      -.env    # Ruta del archivo
+networks:
+  net:
+
+
+
+# otro
+
+version: '3'
+services:       
+  api:
+    container_name: api-panalytics
+    build: .
+    ports:
+      - "5000:3000"
+    volumes:
+      - .:/usr/src/app
+    links: 
+      - mysql:mysql
+    environment: 
+      PORT_DB: 3306
+      HOST_DB: mysql
+      USER_DB: mmaa
+      PASSWORD_DB: mmaa
+      DATABASE: test
+  mysql:
+    container_name: db
+    image: mysql
+    #command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    volumes: 
+      - ./sql-data/db:/var/lib/mysql
+    environment:
+      MYSQL_USER: "mmaa"
+      MYSQL_PASSWORD: "mmaa"
+      MYSQL_ROOT_PASSWORD: "ironDrone"
+      MYSQL_DATABASE: "test"
