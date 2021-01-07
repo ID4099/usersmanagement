@@ -26,9 +26,7 @@ services:
       -.env    # Ruta del archivo
 networks:
   net:
-    
 # otro
-
 version: '3'
 services:       
   api:
