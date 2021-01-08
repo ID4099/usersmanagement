@@ -86,19 +86,21 @@ exports.login = async(req, res, next) => {
                     expiresIn: 86400 //50
                 });
 
-
+                res.status(200);
 
             } else {
                 status = 'failed';
                 message = 'user not logged, by password';
                 token = null;
                 user = null;
+                res.status(404);
             }
         } else {
             status = 'error';
             message = 'user not found';
             token = null;
             user = null;
+            res.status(404);
         }
 
         const confirmation = {
