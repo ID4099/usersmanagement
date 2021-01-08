@@ -17,11 +17,20 @@ describe('POST /management/api/login', () => {
             .send(user)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
+            .expect(function(res) {
+                obj = res.body.token;
+            })
             .expect(200)
             .end(
+                res => {
+                    console.log(obj);
+                    if (res) return done(res);
+                    done();
+                },
                 error => {
                     if (error) return done(error);
-                    else done();
-                })
+                    done();
+                }
+            )
     })
-})
+});
