@@ -55,7 +55,7 @@ exports.newUser = async(req, res) => {
         res.send(confirmation);
 
     } catch (error) {
-        res.send(error);
+        res.status(400).send(error);
     }
 }
 
@@ -113,6 +113,6 @@ exports.login = async(req, res, next) => {
         next();
 
     } catch (error) {
-        res.send(error);
+        res.status(400).send(error);
     }
 }

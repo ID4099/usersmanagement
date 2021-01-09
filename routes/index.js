@@ -18,7 +18,7 @@ module.exports = function() {
     router.post('/management/api/login', AuthLog.login);
     router.post('/management/api/new/user', AuthLog.newUser);
 
-    router.post('/management/api/edit/user/:id', [Middelware.verifyToken, Middelware.verifyAdmin], UsuariosController.updateUser);
+    router.put('/management/api/edit/user/:id', [Middelware.verifyToken, Middelware.verifyAdmin], UsuariosController.updateUser);
 
     router.get('/management/api/all/users', [Middelware.verifyToken, Middelware.verifyAdmin], UsuariosController.getAll);
     router.get('/common/users', [Middelware.verifyToken, Middelware.verifyAdmin], UsuariosController.getCommonUsers);
