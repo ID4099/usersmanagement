@@ -6,3 +6,6 @@
 
 #Env doc
 /.env
+
+#node js workflow.yaml
+/node.yaml
