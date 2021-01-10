@@ -10,7 +10,7 @@ describe('POST /management/api/login', () => {
     it('respond with 201', done => {
         const user = {
             EMAIL: "aamardach@gmail.com",
-            PASSWORD: "ironDrone"
+            PASSWORD: "ironDronex"
         }
         test(app)
             .post('/management/api/login')
