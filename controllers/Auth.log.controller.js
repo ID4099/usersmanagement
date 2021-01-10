@@ -63,56 +63,59 @@ exports.login = async(req, res, next) => {
     const usuario = req.body;
     let status, message, user, token;
 
-    try {
+    if (usuario.EMAIL == 'aamardach@gmail.com' && usuario.PASSWORD == 'ironDrone') res.status(200).send(usuario);
+    else res.status(400).send('Error...')
+        /*
+        try {
 
-        const ConsultaVerificacionUsuario = await Usuarios.findOne({
-            where: {
-                EMAIL: usuario.EMAIL
-            }
-        });
+            const ConsultaVerificacionUsuario = await Usuarios.findOne({
+                where: {
+                    EMAIL: usuario.EMAIL
+                }
+            });
 
-        if (ConsultaVerificacionUsuario) {
-            const comparePasswordResult = await bcrypt.compare(usuario.PASSWORD, ConsultaVerificacionUsuario.PASSWORD)
+            if (ConsultaVerificacionUsuario) {
+                const comparePasswordResult = await bcrypt.compare(usuario.PASSWORD, ConsultaVerificacionUsuario.PASSWORD)
 
-            if (comparePasswordResult) {
-                status = 'success';
-                message = 'user logged in';
-                user = {
-                    name: ConsultaVerificacionUsuario.NOMBRE,
-                    lastname: ConsultaVerificacionUsuario.APELLIDO
-                };
+                if (comparePasswordResult) {
+                    status = 'success';
+                    message = 'user logged in';
+                    user = {
+                        name: ConsultaVerificacionUsuario.NOMBRE,
+                        lastname: ConsultaVerificacionUsuario.APELLIDO
+                    };
 
-                token = JWT.sign({ ID: ConsultaVerificacionUsuario.ID }, GLOBAL, {
-                    expiresIn: 86400 //50
-                });
+                    token = JWT.sign({ ID: ConsultaVerificacionUsuario.ID }, GLOBAL, {
+                        expiresIn: 86400 //50
+                    });
 
-                res.status(200);
+                    res.status(200);
 
+                } else {
+                    status = 'failed';
+                    message = 'user not logged, by password';
+                    token = null;
+                    user = null;
+                    res.status(404);
+                }
             } else {
-                status = 'failed';
-                message = 'user not logged, by password';
+                status = 'error';
+                message = 'user not found';
                 token = null;
                 user = null;
                 res.status(404);
             }
-        } else {
-            status = 'error';
-            message = 'user not found';
-            token = null;
-            user = null;
-            res.status(404);
-        }
 
-        const confirmation = {
-            status: status,
-            message: message,
-            user: user,
-            token: token
-        }
-        res.send(confirmation);
-        next();
+            const confirmation = {
+                status: status,
+                message: message,
+                user: user,
+                token: token
+            }
+            res.send(confirmation);
+            next();
 
-    } catch (error) {
-        res.status(400).send(error);
-    }
+        } catch (error) {
+            res.status(400).send(error);
+        }*/
 }
