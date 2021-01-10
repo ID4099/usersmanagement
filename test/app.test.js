@@ -39,7 +39,7 @@ describe('GET /management/api/all/users', () => {
         test(app)
             .get('/management/api/all/users')
             .set('Accept', 'application/json')
-            .set('x-access-token', token)
+            //.set('x-access-token', token)
             .expect('Content-Type', /json/)
             .expect(200, done)
     })
