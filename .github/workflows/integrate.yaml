@@ -12,11 +12,8 @@ jobs:
     services:
       db:
         image: mysql:latest
-        container_name: db_c
         ports: 
           - "3306:3306"
-        networks:
-          - net
         env_file:
           - .env    # Ruta del archivo
         volumes:
