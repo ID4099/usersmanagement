@@ -14,8 +14,9 @@ jobs:
         image: mysql:latest
         ports: 
           - "3306:3306"
-        volumes:
-          - ./sql-data-services-appMardac/db:/var/lib/mysql
+        #volumes:
+          #- ./sql-data-services-appMardac/db:/var/lib/mysql
+        
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
