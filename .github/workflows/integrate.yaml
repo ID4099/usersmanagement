@@ -16,7 +16,6 @@ jobs:
           - "3306:3306"
         volumes:
           - ./sql-data-services-appMardac/db:/var/lib/mysql
-          - .:/usr/src/app
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
