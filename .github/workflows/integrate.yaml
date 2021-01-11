@@ -16,7 +16,9 @@ jobs:
           - "3306:3306"
         #volumes:
           #- ./sql-data-services-appMardac/db:/var/lib/mysql
-        
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
