@@ -6,7 +6,7 @@ const GLOBAL = 'innovaEcc';
 
 exports.newUser = async(req, res) => {
     const usuario = req.body;
-    let usuarioTmp = null;
+    let user = null;
 
     usuario.PASSWORD = await bcrypt.encrypt(usuario.PASSWORD);
 
@@ -38,18 +38,21 @@ exports.newUser = async(req, res) => {
         if (ConsultarBase1 || ConsultarBase2) {
             status = 'error';
             message = 'data already in the base';
-            usuarioTmp = usuario;
+            user = usuario;
+            res.status(400)
         } else {
             status = 'success';
             message = 'data saved successfully';
 
-            usuarioTmp = await Usuarios.create(usuario);
+            user = await Usuarios.create(usuario);
+
+            res.status(201)
         }
 
         const confirmation = {
             status: status,
             message: message,
-            usuarioTmp
+            user
         }
 
         res.send(confirmation);
@@ -62,9 +65,6 @@ exports.newUser = async(req, res) => {
 exports.login = async(req, res, next) => {
     const usuario = req.body;
     let status, message, user, token;
-
-    /*if (usuario.EMAIL == 'aamardach@gmail.com' && usuario.PASSWORD == 'ironDrone') res.status(200).send(usuario);
-    else res.status(400).send('Error...')*/
 
     try {
 

@@ -11,7 +11,7 @@ services:
     env_file:
       - .env    # Ruta del archivo
     volumes:
-      - ./sql-data-services-appMardac/db:/var/lib/mysql
+      - ../sql-data-services-appMardac/db:/var/lib/mysql
       - .:/usr/src/app
   api:
     image: node:latest
