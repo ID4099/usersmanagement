@@ -9,9 +9,9 @@ exports.getAll = async(req, res) => {
             element.PASSWORD = 'protected'
         });
 
-        res.send(queryAllUsers);
+        res.status(200).send(queryAllUsers);
     } catch (error) {
-        res.send(error);
+        res.status(400).send(error);
     }
 }
 
@@ -27,9 +27,9 @@ exports.getCommonUsers = async(req, res) => {
             element.PASSWORD = 'protected'
         });
 
-        res.send(queryCommonUsers);
+        res.status(200).send(queryCommonUsers);
     } catch (error) {
-        res.send(error);
+        res.status(400).send(error);
     }
 }
 
@@ -61,10 +61,12 @@ exports.updateUser = async(req, res) => {
 
             status = 'success';
             message = 'successfully updated';
+            res.status(200);
 
         } else {
             status = 'error';
             message = 'not updated, data not found';
+            res.status(404);
         }
 
         const confirmation = {
@@ -75,6 +77,21 @@ exports.updateUser = async(req, res) => {
         res.send(confirmation);
 
     } catch (error) {
-        res.send(error);
+        res.status(400).send(error);
     }
+}
+
+exports.deleteUser = async(req, res) => {
+    const param = req.params;
+    try {
+        await Users.destroy({
+            where: {
+                ID: param.id
+            }
+        });
+        res.status(200).send('ok');
+    } catch (error) {
+        res.status(400).send(error);
+    }
+
 }

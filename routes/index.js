@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const AuthLog = require('../controllers/Auth.log.controller');
-const UsuariosController = require('../controllers/Users.controller');
+const RolsUsersController = require('../controllers/Rols.Users.controller')
+const UsersController = require('../controllers/Users.controller');
 const Middelware = require('../middelwares/Auth.token');
 
 /*
@@ -15,13 +16,16 @@ const Middelware = require('../middelwares/Auth.token');
 module.exports = function() {
     //Rutas para las Peticiones de http desde el Front-end
 
+    router.post('/management/api/new/rol', RolsUsersController.setRolUser);
+
     router.post('/management/api/login', AuthLog.login);
     router.post('/management/api/new/user', AuthLog.newUser);
 
-    router.post('/management/api/edit/user/:id', [Middelware.verifyToken, Middelware.verifyAdmin], UsuariosController.updateUser);
+    router.put('/management/api/edit/user/:id', [Middelware.verifyToken, Middelware.verifyAdmin], UsersController.updateUser);
 
-    router.get('/management/api/all/users', [Middelware.verifyToken, Middelware.verifyAdmin], UsuariosController.getAll);
-    router.get('/common/users', [Middelware.verifyToken, Middelware.verifyAdmin], UsuariosController.getCommonUsers);
+    router.get('/management/api/all/users', [Middelware.verifyToken, Middelware.verifyAdmin], UsersController.getAll);
+    router.delete('/management/api/delete/user/:id', UsersController.deleteUser);
+    router.get('/common/users', [Middelware.verifyToken, Middelware.verifyAdmin], UsersController.getCommonUsers);
 
     return router;
 }

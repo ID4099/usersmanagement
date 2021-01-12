@@ -17,7 +17,7 @@ exports.verifyToken = async(req, res, next) => {
                 message: message
             }
 
-            res.send(confirmation);
+            res.status(401).send(confirmation);
 
         } else {
             const decrypt = JWT.verify(token, GLOBAL);
@@ -31,12 +31,13 @@ exports.verifyToken = async(req, res, next) => {
             if (!UsuarioActual) {
                 status = 'internal error';
                 message = 'user not found, communicate to the IT department';
+                res.status(404)
             } else {
                 next();
             }
         }
     } catch (error) {
-        res.send(error);
+        res.status(400).send(error);
     }
 
 }
@@ -66,11 +67,11 @@ exports.verifyAdmin = async(req, res, next) => {
                 message: 'not have sufficient permissions'
             }
 
-            res.send(confirmation);
+            res.status(403).send(confirmation);
 
         }
     } catch (error) {
-        res.send(error);
+        res.status(400).send(error);
     }
 
 }

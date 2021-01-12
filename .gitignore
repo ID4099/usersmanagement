@@ -4,5 +4,8 @@
 #views
 /views
 
-#Env doc
-/.env
+#Env doc 
+#/.env
+
+#node js workflow.yaml
+/node.yaml

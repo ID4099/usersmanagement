@@ -31,3 +31,4 @@ app.use('/', routes());
 db.sync().then(() => console.log('***DB Conectada***')).catch((error) => console.log('***Error en Conexiòn ' + error));
 
 app.listen(3000);
+module.exports = app;
