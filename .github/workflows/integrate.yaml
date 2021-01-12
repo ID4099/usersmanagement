@@ -9,21 +9,6 @@ on:
 jobs:
   ci_to_dev:
     runs-on: ubuntu-latest
-    services:
-      db:
-        image: mysql:latest
-        ports: 
-          - "3306:3306"
-        #volumes:
-          #- ./sql-data-services-appMardac/db:/var/lib/mysql
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: test
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
